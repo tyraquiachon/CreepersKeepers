@@ -7,13 +7,22 @@ public class NoteSpawn : MonoBehaviour
     public float hitWindow = 0.15f;
     public List<Note>notes; 
 
+    public Board board;
+    public GameObject monsterPrefab;
+    public GameObject soulPrefab;
+    List<Note> active = new List<Note>();
+    float travelTime;
+
     void Start()
     {
         generate(testWave);    
     }
     
+    
     public void generate(WaveSettings w)
     {
+        travelTime = Monstestro.Instance.beatTime(w.movingBeats);
+
         notes = new List<Note>();
         float[] laneFreeAt = new float[6];
         int lastLane = -1;
@@ -57,5 +66,53 @@ public class NoteSpawn : MonoBehaviour
         }
         
         
+    }
+
+    void Update()
+    {
+        float now = Monstestro.Instance.songTime;
+
+        foreach(Note n in notes)
+        {
+            if (!n.spawn && n.spawnTime <= now)
+            {
+                Vector3 startPos = board.spawns[n.lane].position;
+
+                if (n.isSoul)
+                {
+                    n.view = Instantiate(soulPrefab, startPos, Quaternion.identity);
+                }else{
+                    n.view = Instantiate(monsterPrefab, startPos, Quaternion.identity);
+                }
+
+                n.spawn = true;
+                active.Add(n);
+                
+            }
+        }
+
+       for (int k = active.Count - 1; k >= 0; k--)
+        {
+            Note n = active[k];
+
+            float t = 1 - (n.hitTime - now) / travelTime;
+            Vector3 spawnPos = board.spawns[n.lane].position;
+            Vector3 pointPos = board.points[n.lane].position;
+
+            if (t <= 1)
+            {
+                n.view.transform.position = Vector3.Lerp(spawnPos, pointPos, t);
+            }
+            else
+            {
+                 n.view.transform.position = Vector3.Lerp(pointPos, board.mansion.position, (t - 1) * 2);
+            }
+
+            if (t >= 1.5f)
+            {
+                Destroy(n.view); active.RemoveAt(k);
+            }
+        }
+
     }
 }
