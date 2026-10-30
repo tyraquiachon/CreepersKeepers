@@ -7,6 +7,8 @@ public int currLane;
 public bool canAct = true;
 public SpriteRenderer sr;
 
+public NoteSpawn spawner;
+
     public void moveTo(int lane)
 {
     currLane = lane;
@@ -32,6 +34,11 @@ public SpriteRenderer sr;
             {
                 moveTo(i);
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            spawner.toExplode(currLane);
         }
     }
 }

@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
 
+using UnityEngine.SceneManagement;
+
 public class NoteSpawn : MonoBehaviour
 {
     public WaveSettings testWave;
@@ -12,6 +14,8 @@ public class NoteSpawn : MonoBehaviour
     public GameObject soulPrefab;
     List<Note> active = new List<Note>();
     float travelTime;
+
+    public int lives = 5; 
 
     void Start()
     {
@@ -112,6 +116,16 @@ public class NoteSpawn : MonoBehaviour
             Note n = active[k];
 
             float t = 1 - (n.hitTime - now) / travelTime;
+
+            if (!n.det && now > n.hitTime + hitWindow)
+            {
+                n.det = true;
+                
+                if (!n.isSoul)
+                {
+                    LoseLife();
+                }
+            }
             Vector3 spawnPos = board.spawns[n.lane].position;
             Vector3 pointPos = board.points[n.lane].position;
 
@@ -131,4 +145,40 @@ public class NoteSpawn : MonoBehaviour
         }
 
     }
+
+    public void LoseLife()
+    {
+        lives--;
+        Debug.Log("Lives: " + lives);
+
+        if (lives <= 0)
+        {
+            Monstestro.Instance.stopSong();
+            SceneManager.LoadScene("Lose");
+        }
+    }
+
+    public void toExplode(int lane)
+    {
+        float now = Monstestro.Instance.songTime;
+
+        for (int k = active.Count - 1; k >= 0; k--)
+        {
+            Note n = active[k];
+            
+            if (n.lane == lane && !n.det && Mathf.Abs(n.hitTime - now) <= hitWindow)
+            {
+                n.det = true;
+                Destroy(n.view);
+                active.RemoveAt(k);
+            
+                if (n.isSoul)
+                {
+                    LoseLife();
+                    return;
+                }
+            }
+        }
+    }
+
 }
