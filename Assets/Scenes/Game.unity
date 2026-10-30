@@ -168,9 +168,12 @@ MonoBehaviour:
     movingBeats: 4
     soulSpawnRate: 0.15
     beatLength: 60
-    earlySouls: 16
+    earlySouls: 0
   hitWindow: 0.15
   notes: []
+  board: {fileID: 1648835171}
+  monsterPrefab: {fileID: 8201786174016507227, guid: 31e40837af69a41fea53917297ae09ec, type: 3}
+  soulPrefab: {fileID: 1456499881960609631, guid: 7fe1c750817724ec281be534b1adc130, type: 3}
 --- !u!1 &223413425
 GameObject:
   m_ObjectHideFlags: 0

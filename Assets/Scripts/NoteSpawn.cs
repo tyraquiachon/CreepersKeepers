@@ -21,6 +21,10 @@ public class NoteSpawn : MonoBehaviour
     
     public void generate(WaveSettings w)
     {
+        if (w.beatsInBetween <= 0){
+            return;
+        }
+        
         travelTime = Monstestro.Instance.beatTime(w.movingBeats);
 
         notes = new List<Note>();
@@ -38,7 +42,7 @@ public class NoteSpawn : MonoBehaviour
 
             for (int i = 0; i < 6; i++)
             {
-                if(laneFreeAt[i] <= spawnT && i != lastLane)
+                if(laneFreeAt[i] <= spawnT + 0.01f && i != lastLane)
                 {
                 free.Add(i);
                 }
@@ -53,16 +57,28 @@ public class NoteSpawn : MonoBehaviour
                 n.lane = lane;
                 n.hitTime = hit;
                 n.spawnTime = spawnT;
-                n.isSoul = soul;
+                n.isSoul = false;
 
-                laneFreeAt[lane] = hit + hitWindow;
+                laneFreeAt[lane] = hit;
                 lastLane = lane;
 
                 notes.Add(n);
-            }
 
+                for (int s = 0; s < 6; s++)
+                {
+                    if (s != lane && laneFreeAt[s] <= spawnT + 0.01f && beat >= w.earlySouls)
+                    {
+                        Note soulNote = new Note();
+                        soulNote.lane = s;
+                        soulNote.hitTime = hit;
+                        soulNote.spawnTime = spawnT;
+                        soulNote.isSoul = true;
+                        laneFreeAt[s] = hit;
+                        notes.Add(soulNote);
+                    }
+                }
+            }  
             beat += w.beatsInBetween;
-
         }
         
         

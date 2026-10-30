@@ -114,8 +114,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3edc8f4e543fc49d1969ffece00904d5
-      internalID: -1329946431
+      spriteID: e71ba07d3f1b24308908dc7812ef17d3
+      internalID: 201676372
       vertices: []
       indices: 
       edges: []
@@ -136,8 +136,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c2f5359c7e07845bc877938a136700d2
-      internalID: 1759130694
+      spriteID: 976a9cd1266bd46caa7d1ab4d97ad2c0
+      internalID: 212647008
       vertices: []
       indices: 
       edges: []
@@ -158,8 +158,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0320857d50e214a268b7312d0d3c2c30
-      internalID: -472852261
+      spriteID: dadda2a0a806643aba076cfe9e364b7c
+      internalID: 1009011893
       vertices: []
       indices: 
       edges: []
@@ -180,8 +180,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c043f82cf0d914ee18dcd04ec73138d2
-      internalID: -671671678
+      spriteID: c07ccf4d1178d4adb9b0aff63164a155
+      internalID: -90890599
       vertices: []
       indices: 
       edges: []
@@ -202,8 +202,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d9f834a0964b14cb68c717ddef7c4471
-      internalID: 700693664
+      spriteID: ce4c68c38132d448084ff302ee66b59b
+      internalID: -1943288598
       vertices: []
       indices: 
       edges: []
@@ -224,11 +224,11 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":5.0,"y":1.0},"gridSpriteSize":{"x":51.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      soul_0: -1329946431
-      soul_1: 1759130694
-      soul_2: -472852261
-      soul_3: -671671678
-      soul_4: 700693664
+      soul_0: 201676372
+      soul_1: 212647008
+      soul_2: 1009011893
+      soul_3: -90890599
+      soul_4: -1943288598
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
