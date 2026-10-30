@@ -7,6 +7,10 @@ public int currLane;
 public bool canAct = true;
 public SpriteRenderer sr;
 
+public GameObject explosionPrefab;
+public float cooldown = 0.25f;
+float nextExplode;
+
 public NoteSpawn spawner;
 
     public void moveTo(int lane)
@@ -36,9 +40,13 @@ public NoteSpawn spawner;
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && Time.time >= nextExplode )
         {
-            spawner.toExplode(currLane);
+           nextExplode = Time.time + cooldown;
+           GameObject boom = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+           Destroy(boom, 0.5f);
+           
+           spawner.toExplode(currLane);
         }
     }
 }
